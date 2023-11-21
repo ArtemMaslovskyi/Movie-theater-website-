@@ -5,6 +5,7 @@ module.exports = {
     "./src/Header.js",
     "./src/index.css",
     "./src/Sidebar.js",
+    "./src/Main.js",
   ],
   theme: {
     extend: {
