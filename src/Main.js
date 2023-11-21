@@ -2,6 +2,8 @@ import React from "react";
 import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
 import { RxDotFilled } from "react-icons/rx";
 import Dropdown from "./Dropdown";
+import FilmCard from "./FilmCard";
+import filmData from "./filmData";
 
 export default function Main() {
   const slides = [
@@ -39,6 +41,19 @@ export default function Main() {
   function goToSlide(slideIndex) {
     setCurrentIndex(slideIndex);
   }
+
+  // eslint-disable-next-line no-unused-vars
+  const [film, setFilm] = React.useState(filmData);
+  const movieList = film.map((item) => (
+    <FilmCard
+      key={item.id}
+      name={item.name}
+      image={item.image}
+      year={item.year}
+      genre1={item.genre1}
+      genre2={item.genre2}
+    />
+  ));
   return (
     <div>
       <div
@@ -81,7 +96,9 @@ export default function Main() {
         <div className="flex items-center">
           <Dropdown name="Sort by" />
         </div>
-        <p>fdfdgf</p>
+      </div>
+      <div className="grid w-auto grid-cols-2 gap-1 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 ms-4">
+        {movieList}
       </div>
     </div>
   );

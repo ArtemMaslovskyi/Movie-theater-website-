@@ -6,6 +6,8 @@ module.exports = {
     "./src/index.css",
     "./src/Sidebar.js",
     "./src/Main.js",
+    "./src/Dropdown.js",
+    "./src/FilmCard.js",
   ],
   theme: {
     extend: {
