@@ -1,6 +1,7 @@
 import React from "react";
 import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
 import { RxDotFilled } from "react-icons/rx";
+import Dropdown from "./Dropdown";
 
 export default function Main() {
   const slides = [
@@ -39,41 +40,49 @@ export default function Main() {
     setCurrentIndex(slideIndex);
   }
   return (
-    <div
-      style={{
-        backgroundImage: `url(${backgroundSlides[currentIndex].url})`,
-      }}
-      className="duration-500 bg-center bg-no-repeat bg-cover"
-    >
-      <div className="relative px-4 py-16 m-auto w-60 h-80 group">
-        <div
-          style={{ backgroundImage: `url(${slides[currentIndex].url})` }}
-          className="w-full h-full duration-500 bg-center bg-cover rounded-2xl"
-        ></div>
-        {/* Left Arrow */}
-        <div className="hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] left-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer">
-          <BsChevronCompactLeft onClick={prevSlide} size={20} />
-        </div>
-        {/* Right Arrow */}
-        <div className="hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] right-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer">
-          <BsChevronCompactRight onClick={nextSlide} size={20} />
-        </div>
+    <div>
+      <div
+        style={{
+          backgroundImage: `url(${backgroundSlides[currentIndex].url})`,
+        }}
+        className="duration-500 bg-center bg-no-repeat bg-cover"
+      >
+        <div className="relative px-4 py-16 m-auto w-60 h-96 group">
+          <div
+            style={{ backgroundImage: `url(${slides[currentIndex].url})` }}
+            className="w-full h-full duration-500 bg-center bg-cover rounded-2xl"
+          ></div>
+          {/* Left Arrow */}
+          <div className="hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] left-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer">
+            <BsChevronCompactLeft onClick={prevSlide} size={20} />
+          </div>
+          {/* Right Arrow */}
+          <div className="hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] right-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer">
+            <BsChevronCompactRight onClick={nextSlide} size={20} />
+          </div>
 
-        <div className="flex justify-center py-2 top-4 mix-blend-overlay">
-          {slides.map((slide, slideIndex) => (
-            <div
-              key={slideIndex}
-              onClick={() => goToSlide(slideIndex)}
-              className="text-2xl cursor-pointer"
-            >
-              <RxDotFilled className="" color="white" />
-            </div>
-          ))}
+          <div className="flex justify-center py-2 top-4 mix-blend-overlay">
+            {slides.map((slide, slideIndex) => (
+              <div
+                key={slideIndex}
+                onClick={() => goToSlide(slideIndex)}
+                className="text-2xl cursor-pointer"
+              >
+                <RxDotFilled className="" color="white" />
+              </div>
+            ))}
+          </div>
         </div>
+        <h2 className="pb-4 text-4xl font-extrabold text-center text-gray-100 capitalize duration-500 mix-blend-difference">
+          {slides[currentIndex].name}
+        </h2>
       </div>
-      <h2 className="pb-4 text-4xl font-extrabold text-center text-gray-500 capitalize duration-500 mix-blend-difference">
-        {slides[currentIndex].name}
-      </h2>
+      <div>
+        <div className="flex items-center">
+          <Dropdown name="Sort by" />
+        </div>
+        <p>fdfdgf</p>
+      </div>
     </div>
   );
 }
