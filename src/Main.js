@@ -1,7 +1,6 @@
 import React from "react";
 import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
 import { RxDotFilled } from "react-icons/rx";
-import Dropdown from "./Dropdown";
 import FilmCard from "./FilmCard";
 import filmData from "./filmData";
 
@@ -52,8 +51,29 @@ export default function Main() {
       year={item.year}
       genre1={item.genre1}
       genre2={item.genre2}
+      rate={item.raiting}
     />
   ));
+  const sortedMovieList = film
+    .slice()
+    .sort((a, b) => b.raiting - a.raiting)
+    .map((item) => (
+      <FilmCard
+        key={item.id}
+        name={item.name}
+        image={item.image}
+        year={item.year}
+        genre1={item.genre1}
+        genre2={item.genre2}
+        rate={item.raiting}
+      />
+    ));
+
+  const [selectOption, setSelectOption] = React.useState("default");
+  const handleChange = (e) => {
+    const selectedValue = e.target.value;
+    setSelectOption(selectedValue);
+  };
   return (
     <div>
       <div
@@ -94,11 +114,18 @@ export default function Main() {
       </div>
       <div>
         <div className="flex items-center">
-          <Dropdown name="Sort by" />
+          <select
+            className="p-2 m-4 rounded-md bg-accent-1"
+            onChange={handleChange}
+          >
+            <option value={"default"}>Default</option>
+            <option value={"rating"}>Rating</option>
+          </select>
         </div>
       </div>
       <div className="grid w-auto grid-cols-2 gap-1 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 ms-4">
-        {movieList}
+        {selectOption === "default" && movieList}
+        {selectOption === "rating" && sortedMovieList}
       </div>
     </div>
   );
