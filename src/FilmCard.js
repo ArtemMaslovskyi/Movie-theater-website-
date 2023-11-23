@@ -11,7 +11,7 @@ export default function FilmCard(props) {
         alt="card"
         className="md:w-[180px] w-52 lg:w-48"
       ></img>
-      <p className="mt-2 font-bold text-center">{props.name}</p>
+      <p className="mx-1 mt-2 font-bold text-center truncate">{props.name}</p>
       <div className="flex flex-row mx-2 my-2 justify-evenly">
         <p className="text-sm hover:underline decoration-2">{props.year}</p>
         <p className="text-sm">•</p>
