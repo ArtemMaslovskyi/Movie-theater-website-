@@ -3,6 +3,7 @@ import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
 import { RxDotFilled } from "react-icons/rx";
 import FilmCard from "./FilmCard";
 import filmData from "./filmData";
+import Footer from "./Footer";
 
 export default function Main() {
   const slides = [
@@ -74,6 +75,30 @@ export default function Main() {
     const selectedValue = e.target.value;
     setSelectOption(selectedValue);
   };
+
+  const filterMoviesByGenre = (genre) =>
+    film
+      .slice()
+      .filter((item) => item.genre1 === genre || item.genre2 === genre)
+      .map((item) => (
+        <FilmCard
+          key={item.id}
+          name={item.name}
+          image={item.image}
+          year={item.year}
+          genre1={item.genre1}
+          genre2={item.genre2}
+          rate={item.raiting}
+        />
+      ));
+  const movieListCrime = filterMoviesByGenre("Crime");
+  const movieListDrama = filterMoviesByGenre("Drama");
+  const movieListSciFi = filterMoviesByGenre("Sci-Fi");
+  const movieListThriller = filterMoviesByGenre("Thriller");
+  const movieListAction = filterMoviesByGenre("Acrion");
+  const movieListWestern = filterMoviesByGenre("Western");
+  const movieListAnime = filterMoviesByGenre("Anime");
+  const movieListHorror = filterMoviesByGenre("Horror");
   return (
     <div>
       <div
@@ -103,7 +128,7 @@ export default function Main() {
                 onClick={() => goToSlide(slideIndex)}
                 className="text-2xl cursor-pointer"
               >
-                <RxDotFilled className="" color="white" />
+                <RxDotFilled color="white" />
               </div>
             ))}
           </div>
@@ -121,12 +146,34 @@ export default function Main() {
             <option value={"default"}>Default</option>
             <option value={"rating"}>Rating</option>
           </select>
+          <select
+            className="p-2 m-4 rounded-md bg-accent-1"
+            onChange={handleChange}
+          >
+            <option value={"crime"}>Crime</option>
+            <option value={"drama"}>Drama</option>
+            <option value={"scifi"}>Sci-Fi</option>
+            <option value={"thriller"}>Thriller</option>
+            <option value={"action"}>Action</option>
+            <option value={"western"}>Western</option>
+            <option value={"anime"}>Anime</option>
+            <option value={"horror"}>Horror</option>
+          </select>
         </div>
       </div>
       <div className="grid w-auto grid-cols-2 gap-1 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 ms-4">
         {selectOption === "default" && movieList}
         {selectOption === "rating" && sortedMovieList}
+        {selectOption === "crime" && movieListCrime}
+        {selectOption === "drama" && movieListDrama}
+        {selectOption === "scifi" && movieListSciFi}
+        {selectOption === "thriller" && movieListThriller}
+        {selectOption === "action" && movieListAction}
+        {selectOption === "western" && movieListWestern}
+        {selectOption === "anime" && movieListAnime}
+        {selectOption === "horror" && movieListHorror}
       </div>
+      <Footer />
     </div>
   );
 }

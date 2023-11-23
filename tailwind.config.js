@@ -8,6 +8,7 @@ module.exports = {
     "./src/Main.js",
     "./src/Dropdown.js",
     "./src/FilmCard.js",
+    "./src/Footer.js",
   ],
   theme: {
     extend: {
